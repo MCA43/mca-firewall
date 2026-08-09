@@ -1,0 +1,234 @@
+/* mca/firewall — mca-ui / mca-perm uyumlu */
+
+.mca-fw-main {
+    max-width: 80rem;
+}
+
+.mca-fw-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.mca-fw-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.mca-fw-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+}
+
+.mca-fw-tabs__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 0.75rem;
+    border-radius: var(--mca-ui-radius-sm, 0.5rem);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #334155;
+    background: transparent;
+}
+
+.mca-fw-tabs__link:hover {
+    background: var(--mca-ui-surface-2, #f1f5f9);
+}
+
+.mca-fw-tabs__link.is-active {
+    background: var(--mca-ui-primary-soft, #e0e7ff);
+    color: var(--mca-ui-primary, #4f46e5);
+    font-weight: 600;
+}
+
+.mca-fw-tabs__count {
+    font-size: 0.75rem;
+    opacity: 0.75;
+}
+
+.mca-fw-search {
+    min-width: min(100%, 16rem);
+}
+
+.mca-fw-table-wrap {
+    overflow-x: auto;
+}
+
+.mca-fw-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+}
+
+.mca-fw-table th,
+.mca-fw-table td {
+    text-align: left;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid var(--mca-ui-border, #e2e8f0);
+    vertical-align: middle;
+}
+
+.mca-fw-table th {
+    font-weight: 600;
+    color: #64748b;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+.mca-fw-ip {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.85rem;
+}
+
+.mca-fw-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.5rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.mca-fw-badge--whitelist {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.mca-fw-badge--blacklist {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.mca-fw-badge--active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.mca-fw-badge--inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.mca-fw-badge--expired {
+    background: #ffedd5;
+    color: #9a3412;
+}
+
+.mca-fw-col-actions {
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: middle;
+}
+
+.mca-fw-actions {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 0.35rem;
+    justify-content: flex-end;
+    align-items: center;
+    margin-left: auto;
+}
+
+.mca-fw-actions form {
+    display: inline-flex;
+    margin: 0;
+}
+
+.mca-fw-tip {
+    position: relative;
+}
+
+.mca-fw-tip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: 50%;
+    bottom: calc(100% + 0.45rem);
+    transform: translateX(50%) translateY(0.15rem);
+    padding: 0.3rem 0.55rem;
+    border-radius: var(--mca-ui-radius-sm, 0.4rem);
+    background: #0f172a;
+    color: #f8fafc;
+    font-size: 0.72rem;
+    font-weight: 500;
+    line-height: 1.2;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
+    z-index: 30;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.18);
+}
+
+.mca-fw-tip::before {
+    content: '';
+    position: absolute;
+    right: 50%;
+    bottom: calc(100% + 0.2rem);
+    transform: translateX(50%) translateY(0.15rem);
+    border: 5px solid transparent;
+    border-top-color: #0f172a;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s ease, transform 0.12s ease, visibility 0.12s ease;
+    z-index: 30;
+}
+
+.mca-fw-tip:hover::after,
+.mca-fw-tip:focus-visible::after,
+.mca-fw-tip:hover::before,
+.mca-fw-tip:focus-visible::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(50%) translateY(0);
+}
+
+.mca-fw-form-card {
+    max-width: 42rem;
+}
+
+.mca-fw-fields {
+    display: grid;
+    gap: 0.85rem 1rem;
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+    .mca-fw-fields {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+.mca-fw-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    grid-column: 1 / -1;
+}
+
+.mca-fw-form__actions {
+    margin-top: 1.25rem;
+}
+
+.mca-fw-pagination {
+    margin-top: 1rem;
+}
+
+.mca-fw-suite-hint {
+    margin-top: 1rem;
+}
