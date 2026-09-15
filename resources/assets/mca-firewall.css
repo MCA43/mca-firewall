@@ -229,6 +229,19 @@
     margin-top: 1rem;
 }
 
+.mca-fw-pagination .mca-ui-pagination {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+}
+
+.mca-fw-pagination nav[role="navigation"] svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    max-width: 1.25rem;
+    max-height: 1.25rem;
+}
+
 .mca-fw-suite-hint {
     margin-top: 1rem;
 }

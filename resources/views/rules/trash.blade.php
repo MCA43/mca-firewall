@@ -70,7 +70,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="mca-fw-pagination">{{ $rules->links() }}</div>
+                <div class="mca-fw-pagination">{{ $rules->links('mca-firewall::partials.pagination') }}</div>
             @endif
         </div>
     </div>
