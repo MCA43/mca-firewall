@@ -4,6 +4,7 @@ namespace Mca\Firewall\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Mca\Permission\Services\PackageAccessService;
 use Mca\Permission\Services\PermissionService;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -17,12 +18,26 @@ class EnsureMcaFirewallRoot
             abort(403);
         }
 
+        $forbidden = function_exists('mca_fw') ? mca_fw('errors.root_only') : 'Bu MCA paketi için yetkiniz yok.';
+
+        if (class_exists(PackageAccessService::class)
+            && is_array(config('permission.packages.firewall'))) {
+            $packages = app(PackageAccessService::class);
+            $ability = $packages->abilityForRequest($request);
+
+            if ($packages->allows($user, 'firewall', $ability)) {
+                return $next($request);
+            }
+
+            abort(403, $forbidden);
+        }
+
         if (config('firewall.access.use_permission_root', true) && class_exists(PermissionService::class)) {
             if (app(PermissionService::class)->isRoot($user)) {
                 return $next($request);
             }
 
-            abort(403, mca_fw('errors.root_only'));
+            abort(403, $forbidden);
         }
 
         $column = (string) config('firewall.access.role_column', 'role_id');
@@ -37,6 +52,6 @@ class EnsureMcaFirewallRoot
             return $next($request);
         }
 
-        abort(403, mca_fw('errors.root_only'));
+        abort(403, $forbidden);
     }
 }
